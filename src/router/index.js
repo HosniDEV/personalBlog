@@ -17,6 +17,11 @@ const router = createRouter({
       name: "category",
       component: CategoryView,
     },
+    {
+      path: "/article/:slug",
+      name: "article",
+      component: () => import("@/views/DetailView.vue"),
+    },
   ],
 });
 

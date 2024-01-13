@@ -2,7 +2,8 @@
   <section class="space-y-2 sm:space-y-6">
     <div class="relative overflow-hidden">
       <img
-        src="https://picsum.photos/400/300?random=3"
+        loading="lazy"
+        :src="article.image"
         class="w-full object-cover h-full aspect-video"
       />
       <div
@@ -11,31 +12,32 @@
         <div class="flex items-center space-x-2">
           <div class="flex space-x-2 items-center">
             <UserIcon class="size-4" />
-            <span class="font-lora text-sm text-primaryColor"
-              >Hosni Abdellah</span
-            >
+            <span class="font-lora text-sm text-primaryColor">{{
+              article.user.name
+            }}</span>
           </div>
           <div class="flex space-x-2 items-center">
             <ClockIcon class="size-4" />
-            <span class="font-lora text-sm text-primaryColor">12-08-1997</span>
+            <span class="font-lora text-sm text-primaryColor">{{
+              postStore.getSimpleDate(article.created_at)
+            }}</span>
           </div>
           <div class="flex space-x-2 items-center">
             <ChatBubbleOvalLeftIcon class="size-4" />
-            <span class="font-lora text-sm text-primaryColor">1</span>
+            <span class="font-lora text-sm text-primaryColor"></span>
           </div>
         </div>
-        <h1>why you should have to visit morocco</h1>
+        <h1>{{ article.title }}</h1>
       </div>
     </div>
     <div class="py-4 space-y-3">
       <p class="text-sm font-thin font-lora text-primaryColor">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. A corrupti
-        officia nesciunt, veniam earum voluptas eum fuga quas sed, officiis
-        error aliquid molestiae quibusdam modi molestias sint aspernatur,
-        inventore at.
+        {{ article.content }}
       </p>
-      <ButtonApp></ButtonApp>
     </div>
+    <RouterLink :to="{ name: 'article', params: { slug: article.slug } }"
+      ><ButtonApp></ButtonApp
+    ></RouterLink>
   </section>
 </template>
 
@@ -46,6 +48,14 @@ import {
   ChatBubbleOvalLeftIcon,
 } from "@heroicons/vue/24/outline";
 import ButtonApp from "@/components/blogComponents/ButtonApp.vue";
+import { usePostStore } from "@/stores/postStore/post";
+import { RouterLink } from "vue-router";
+const postStore = usePostStore();
+defineProps({
+  article: {
+    type: Object,
+  },
+});
 </script>
 
 <style lang="scss" scoped></style>

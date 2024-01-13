@@ -17,6 +17,7 @@
     </div>
     <div class="h-[200px] relative group overflow-hidden">
       <img
+        loading="lazy"
         src="https://picsum.photos/200/300?random=3"
         class="w-full object-cover h-full"
       />
